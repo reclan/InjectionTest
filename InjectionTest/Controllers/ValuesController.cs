@@ -4,12 +4,17 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using InjectionTest.Test;
 
 namespace InjectionTest.Controllers {
-    public class ValuesController : ApiController {
+    public class ValuesController : ApiController{
+        private ISample sample;
+        public ValuesController( ISample sample ){
+            this.sample = sample;
+        }
         // GET api/values
-        public IEnumerable<string> Get() {
-            return new string[] { "value1", "value2" };
+        public IEnumerable<string> Get(){
+            return sample.GetValues();
         }
 
         // GET api/values/5
